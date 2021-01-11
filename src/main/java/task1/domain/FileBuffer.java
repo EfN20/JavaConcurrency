@@ -1,11 +1,12 @@
 package task1.domain;
 
 import task1.domain.interfaces.IFileBuffer;
+import task1.services.interfaces.IFilesService;
 
 import java.io.File;
 import java.util.concurrent.ArrayBlockingQueue;
 
-public class FileBuffer implements IFileBuffer {
+public class FileBuffer implements IFileBuffer<File>, IFilesService {
     private final ArrayBlockingQueue<File> buffer;
 
     public FileBuffer() {
@@ -28,5 +29,10 @@ public class FileBuffer implements IFileBuffer {
     @Override
     public boolean isQueueEmpty() {
         return buffer.isEmpty();
+    }
+
+    @Override
+    public File[] getFileList() {
+        return new File("/home/azatkali/JavaProjects/Assignment-1/src/main/webapp/task1-web/files").listFiles();
     }
 }

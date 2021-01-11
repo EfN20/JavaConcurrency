@@ -9,9 +9,9 @@ public class Task1Domain extends Thread {
     private static SecureRandom secureRandom = new SecureRandom();
     private File[] files;
 
-    public Task1Domain(FileBuffer sharedBuffer, File[] files) {
+    public Task1Domain(FileBuffer sharedBuffer) {
         this.sharedBuffer = sharedBuffer;
-        this.files = files;
+        this.files = sharedBuffer.getFileList();
     }
 
     @Override

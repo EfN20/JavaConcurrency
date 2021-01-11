@@ -17,16 +17,15 @@ import java.util.concurrent.TimeUnit;
 
 @WebServlet(name = "RenameFilesServlet", value = "/rename")
 public class RenameFilesServlet extends HttpServlet {
-    private IFilesService filesService = new FileService();
     private FileBuffer fileBuffer = new FileBuffer();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ExecutorService executorService = Executors.newFixedThreadPool(4);
-        executorService.submit(new Task1Domain(fileBuffer, filesService.getFileList()));
-        executorService.submit(new Task1Domain(fileBuffer, filesService.getFileList()));
-        executorService.submit(new Task1Domain(fileBuffer, filesService.getFileList()));
-        executorService.submit(new Task1Domain(fileBuffer, filesService.getFileList()));
+        executorService.submit(new Task1Domain(fileBuffer));
+        executorService.submit(new Task1Domain(fileBuffer));
+        executorService.submit(new Task1Domain(fileBuffer));
+        executorService.submit(new Task1Domain(fileBuffer));
         executorService.shutdown();
         try {
             executorService.awaitTermination(5, TimeUnit.MINUTES);

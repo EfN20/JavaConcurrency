@@ -22,15 +22,15 @@ public class SearchServlet extends HttpServlet {
         System.out.println(textToSearch);
         if(!textToSearch.equals(null)) {
             ExecutorService executorService = Executors.newFixedThreadPool(3);
-            List<Future<Integer>> resultList = new ArrayList<>();
+            List<Future<String>> resultList = new ArrayList<>();
             for(int i = 0; i < 3; i++) {
                 SearchThread thread = new SearchThread(someService, textToSearch);
-                Future<Integer> result = executorService.submit((Callable<Integer>) thread);
+                Future<String> result = executorService.submit((Callable<String>) thread);
                 resultList.add(result);
             }
 
             int count = 1;
-            for(Future<Integer> future : resultList) {
+            for(Future<String> future : resultList) {
                 try {
                     request.setAttribute("file" + count, future.get());
                 } catch (InterruptedException | ExecutionException e) {

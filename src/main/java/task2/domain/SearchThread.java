@@ -6,13 +6,14 @@ import java.io.*;
 import java.security.SecureRandom;
 import java.util.concurrent.Callable;
 
-public class SearchThread implements Callable<Integer>, Runnable {
+public class SearchThread implements Callable<String>, Runnable {
     private static int COUNTER_FILE = 0;
     private static Integer SUM = 0;
     private static SecureRandom secureRandom = new SecureRandom();
     private SomeService someService;
     private String searchText;
     private int counter;
+    private File curFile;
 
     public SearchThread(SomeService someService, String searchText) {
         this.someService = someService;
@@ -21,10 +22,10 @@ public class SearchThread implements Callable<Integer>, Runnable {
     }
 
     @Override
-    public Integer call() throws InterruptedException {
+    public String call() throws InterruptedException {
         Thread.sleep(secureRandom.nextInt(3000));
         run();
-        return counter;
+        return curFile.getName() + ": " + counter;
     }
 
     @Override
@@ -47,6 +48,7 @@ public class SearchThread implements Callable<Integer>, Runnable {
     }
 
     public void searchWord(File file) throws IOException {
+        this.curFile = file;
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
         String s;

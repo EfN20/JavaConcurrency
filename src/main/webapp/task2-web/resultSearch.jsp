@@ -14,8 +14,8 @@
 <body>
     <h1>Result: </h1>
     <h1>Searched word: <c:out value="${searchedWord}" /></h1>
-    <p>File 1 count: <c:out value="${file1}" /></p>
-    <p>File 2 count: <c:out value="${file2}" /></p>
-    <p>File 3 count: <c:out value="${file3}" /></p>
+    <p><c:out value="${file1}" /></p>
+    <p><c:out value="${file2}" /></p>
+    <p><c:out value="${file3}" /></p>
 </body>
 </html>
